@@ -45,3 +45,19 @@ fs.readFile("./data.json", "utf-8", (err, fileData) => {
     });
   }
 });
+
+//eliminar el último user:
+fs.readFile("./data.json", "utf-8", (err, fileData) => {
+  if (err) {
+    console.log(err);
+  } else {
+    const data = JSON.parse(fileData);
+    data.clientes.pop();
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+});
