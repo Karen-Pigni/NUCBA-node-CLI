@@ -1,13 +1,13 @@
 const fs = require("fs");
 
 //leer
-fs.readFile("./clients.json", "utf-8", (err, data) => {
+fs.readFile("./clients/clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     try {
       const parsedData = JSON.parse(data);
-      console.log(parsedData.address);
+      console.log(parsedData);
     } catch (error) {
       console.log(error);
     }
@@ -16,26 +16,23 @@ fs.readFile("./clients.json", "utf-8", (err, data) => {
 
 //nuevo user a agregar:
 const newUser = {
-  user: "Pablo Palotes3",
-  category: 2,
-  address: "Güemes 22523",
+  user: "Andrea Gomez",
+  category: 5,
+  address: "Salguero 1546",
 };
 
 //agregar un user:
-fs.readFile("./clients.json", "utf-8", (err, data) => {
+fs.readFile("./clients/clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     const user = JSON.parse(data);
     user.clientes.push(newUser);
-    fs.writeFile(
-      "./clients.json",
-      JSON.stringify(user, null, 2),
-      (err, success) => {
+    fs.writeFile("./clients/clients.json", JSON.stringify(user, null, 2), (err, success) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(success, "agregar user funciona!!");
+          console.log(success, "funciona!!");
         }
       }
     );
@@ -43,20 +40,17 @@ fs.readFile("./clients.json", "utf-8", (err, data) => {
 });
 
 //borrar el último user!
-fs.readFile("./clients.json", "utf-8", (err, data) => {
+fs.readFile("./clients/clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     const user = JSON.parse(data);
     user.clientes.pop();
-    fs.writeFile(
-      "./clients.json",
-      JSON.stringify(user, null, 2),
-      (err, success) => {
+    fs.writeFile("./clients/clients.json", JSON.stringify(user, null, 2), (err, success) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(success, "borrar último user funciona!!");
+          console.log(success, "funciona!!");
         }
       }
     );
@@ -64,20 +58,17 @@ fs.readFile("./clients.json", "utf-8", (err, data) => {
 });
 
 //elegir qué user borrar!
-fs.readFile("./clients.json", "utf-8", (err, data) => {
+fs.readFile("./clients/clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     const user = JSON.parse(data);
-    user.clientes.splice(3, 1);
-    fs.writeFile(
-      "./clients.json",
-      JSON.stringify(user, null, 2),
-      (err, success) => {
+    user.clientes.splice(3,1);
+    fs.writeFile("./clients/clients.json", JSON.stringify(user, null, 2), (err, success) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(success, "borrar user por posicion funciona!!");
+          console.log(success, "funciona!!");
         }
       }
     );
@@ -85,27 +76,24 @@ fs.readFile("./clients.json", "utf-8", (err, data) => {
 });
 
 //modificar un user:
-fs.readFile("./clients.json", "utf-8", (err, data) => {
+fs.readFile("./clients/clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     const user = JSON.parse(data);
     user.clientes.splice(1, 1, {
-      user: "nuevo user",
-      category: 3,
-      address: "Encalada 12",
-    });
-    fs.writeFile(
-      "./clients.json",
-      JSON.stringify(user, null, 2),
-      (err, success) => {
+         user: "nuevo user",
+         category: 3,
+         address: "Encalada 12",
+       });
+    fs.writeFile("./clients/clients.json", JSON.stringify(user, null, 2), (err, success) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(success, "editar funciona!!");
+          console.log(success, "funciona!!");
         }
       }
     );
-    console.log(user);
+    console.log(user)
   }
 });
