@@ -1,63 +1,111 @@
 const fs = require("fs");
 
-//escribir el primero
-fs.readFile("./data.json", "utf-8", (err, fileData) => {
+//leer
+fs.readFile("./clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     try {
-      const data = JSON.parse(fileData);
-      console.log(data.direccion);
-    } catch (err) {
-      console.log(err);
+      const parsedData = JSON.parse(data);
+      console.log(parsedData.address);
+    } catch (error) {
+      console.log(error);
     }
   }
 });
 
-// crear nuevo user
+//nuevo user a agregar:
 const newUser = {
-  cliente: "Totito",
-  direccion: "calle real 456",
-  teléfono: "543536",
+  user: "Pablo Palotes3",
+  category: 2,
+  address: "Güemes 22523",
 };
 
-//crear nuevo file
-fs.writeFile("./moreData.json", JSON.stringify(newUser, null, 2), (err) => {
+//agregar un user:
+fs.readFile("./clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
-    console.log("hell yeah!");
+    const user = JSON.parse(data);
+    user.clientes.push(newUser);
+    fs.writeFile(
+      "./clients.json",
+      JSON.stringify(user, null, 2),
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(success, "agregar user funciona!!");
+        }
+      }
+    );
   }
 });
 
-//appendear user nuevo al original:
-fs.readFile("./data.json", "utf-8", (err, fileData) => {
+//borrar el último user!
+fs.readFile("./clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
-    const data = JSON.parse(fileData);
-    data.clientes.push(newUser);
-
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
-      if (err) {
-        console.log(err);
+    const user = JSON.parse(data);
+    user.clientes.pop();
+    fs.writeFile(
+      "./clients.json",
+      JSON.stringify(user, null, 2),
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(success, "borrar último user funciona!!");
+        }
       }
-    });
+    );
   }
 });
 
-//eliminar el último user:
-fs.readFile("./data.json", "utf-8", (err, fileData) => {
+//elegir qué user borrar!
+fs.readFile("./clients.json", "utf-8", (err, data) => {
   if (err) {
     console.log(err);
   } else {
-    const data = JSON.parse(fileData);
-    data.clientes.pop();
-
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
-      if (err) {
-        console.log(err);
+    const user = JSON.parse(data);
+    user.clientes.splice(3, 1);
+    fs.writeFile(
+      "./clients.json",
+      JSON.stringify(user, null, 2),
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(success, "borrar user por posicion funciona!!");
+        }
       }
+    );
+  }
+});
+
+//modificar un user:
+fs.readFile("./clients.json", "utf-8", (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    const user = JSON.parse(data);
+    user.clientes.splice(1, 1, {
+      user: "nuevo user",
+      category: 3,
+      address: "Encalada 12",
     });
+    fs.writeFile(
+      "./clients.json",
+      JSON.stringify(user, null, 2),
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(success, "editar funciona!!");
+        }
+      }
+    );
+    console.log(user);
   }
 });

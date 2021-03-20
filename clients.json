@@ -1,0 +1,19 @@
+{
+  "clientes": [
+    {
+      "user": "Juan Perez",
+      "category": 5,
+      "address": "San Lorenzo 3453"
+    },
+    {
+      "user": "nuevo user",
+      "category": 3,
+      "address": "Encalada 12"
+    },
+    {
+      "user": "Pablo Palotes3",
+      "category": 2,
+      "address": "Güemes 3"
+    }
+  ]
+}
